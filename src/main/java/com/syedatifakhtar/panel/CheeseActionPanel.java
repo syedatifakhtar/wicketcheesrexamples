@@ -48,10 +48,17 @@ public class CheeseActionPanel extends Panel {
 		attachComponents();
 	}
 
+	/*
+	 * Toggles component visibility and layout Show EDIT layout when the admin
+	 * wants to create/edit a cheese field Display only labels on MODE.SHOW
+	 */
 	private void toggleVisibility() {
 
-		AttributeAppender showComponent	=	new AttributeAppender("class", new Model<String>("unhide"), " ");
-		AttributeAppender hideComponent = new AttributeAppender("class", new Model<String>("hide"), " ");
+		//Append display:block or display:hidden to hide content
+		AttributeAppender showComponent = new AttributeAppender("class",
+				new Model<String>("unhide"), " ");
+		AttributeAppender hideComponent = new AttributeAppender("class",
+				new Model<String>("hide"), " ");
 		switch (mode) {
 		case SHOW:
 			cheeseName.setVisible(true);
@@ -89,6 +96,9 @@ public class CheeseActionPanel extends Panel {
 		}
 	}
 
+	/*
+	 * Initialize all fields
+	 */
 	private void init() {
 		cheeseActionForm = new Form<Void>("cheeseActionForm");
 		cheeseActionForm.setOutputMarkupId(true);
@@ -119,7 +129,7 @@ public class CheeseActionPanel extends Panel {
 		deleteCheeseButton = new Button("deleteCheeseButton") {
 			public void onSubmit() {
 				cheeseActionForm.add(new AttributeModifier("style",
-						"display:none"));
+						"display:none"));								//Hide the record as a quick measure
 			}
 		};
 		deleteCheeseButton.setOutputMarkupId(true);
@@ -132,6 +142,10 @@ public class CheeseActionPanel extends Panel {
 		};
 	}
 
+	/**
+	 * Attach components to form and form to the page
+	 */
+			
 	private void attachComponents() {
 		cheeseActionForm.add(cheeseName);
 		cheeseActionForm.add(cheeseDescription);

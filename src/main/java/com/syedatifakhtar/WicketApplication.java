@@ -10,6 +10,7 @@ import org.apache.wicket.util.file.IResourceFinder;
 
 import com.syedatifakhtar.pages.HomePage;
 import com.syedatifakhtar.service.MessengerService;
+import com.syedatifakhtar.utils.MountedMapperWithoutPageComponentInfo;
 
 /**
  * Application object for your web application. If you want to run this application without deploying, run the Start class.
@@ -49,6 +50,8 @@ public class WicketApplication extends WebApplication
 		IResourceFinder pageResources	=	webAppPath;
 		System.out.println("Using resource path: " + webAppPath.toString());
 		resourceSettings.getResourceFinders().add(pageResources);
+		
+		mount(new MountedMapperWithoutPageComponentInfo("/",HomePage.class));
 	}
 	
 	public MessengerService getMessengerService() {

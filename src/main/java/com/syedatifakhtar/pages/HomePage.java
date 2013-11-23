@@ -33,16 +33,21 @@ public class HomePage extends BasePage {
 		cheeses = generateDummyCheeseList();
 		cheeseRepeater = new RepeatingView("cheeseRepeater");
 		for (Cheese cheese : cheeses) {
-			cheeseRepeater.add(new CheeseActionPanel(cheeseRepeater.newChildId(), cheese));
+			cheeseRepeater.add(new CheeseActionPanel(cheeseRepeater
+					.newChildId(), cheese));
 		}
 		cheeseRepeater.setOutputMarkupId(true);
-		cheeseRepeaterContainer	=	new WebMarkupContainer("cheeseRepeaterContainer");
+		cheeseRepeaterContainer = new WebMarkupContainer(
+				"cheeseRepeaterContainer"); //A hack to allow the repeater to repaint itself
 		cheeseRepeaterContainer.setOutputMarkupId(true);
-		addCheeseAjaxLink	=	new AjaxFallbackLink<Void>("addCheeseAjaxFallbackLink") {
+		addCheeseAjaxLink = new AjaxFallbackLink<Void>(
+				"addCheeseAjaxFallbackLink") {
 			@Override
 			public void onClick(AjaxRequestTarget requestTarget) {
-				Cheese addedCheese	=	new Cheese();
-				CheeseActionPanel cheeseActionPanel	=new CheeseActionPanel(cheeseRepeater.newChildId(), addedCheese,CheeseActionPanel.Mode.CREATE);	
+				Cheese addedCheese = new Cheese();
+				CheeseActionPanel cheeseActionPanel = new CheeseActionPanel(
+						cheeseRepeater.newChildId(), addedCheese,
+						CheeseActionPanel.Mode.CREATE);
 				cheeseRepeater.add(cheeseActionPanel);
 				requestTarget.add(cheeseRepeaterContainer);
 			}

@@ -15,7 +15,7 @@
     <property name="build.reports.dir" value="${build.dir}/reports" />
     
     <!-- Set to your deploy folder -->
-    <property name="tomcat.dir" value="X:\Dev\jboss-as-7.1.1.Final\jboss-as-7.1.1.Final\standalone\deployments" />
+    <property name="jboss.dir" value="X:\Dev\jboss-as-7.1.1.Final\jboss-as-7.1.1.Final\standalone\deployments" />
 
     <!-- IMPORTANT ->All files which are required dependencies need to be present in the classpath! -->
     <path id="build.classpath">
@@ -111,7 +111,7 @@
 
     <target name="deploy" depends="war" description="Stupidly copies war file to tomcat/jboss deploy folder">
         <echo>Deploying .war to Jboss</echo>
-        <copy todir="${tomcat.dir}">
+        <copy todir="${jboss.dir}">
             <fileset dir="${build.dir}" includes="${final.name}.war" />
         </copy>
     </target>
