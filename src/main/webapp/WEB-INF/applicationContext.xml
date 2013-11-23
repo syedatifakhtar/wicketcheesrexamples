@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+        <!--
+                This will automatically locate any and all property files you have
+                within your classpath, provided they fall under the META-INF
+                directory. The located property files are parsed and their values can
+                then be used within application context files in the form of
+                ${propertyKey}.
+        -->
+        <!-- <context:property-placeholder location="classpath*:*.properties" />  -->
+        
+        <!-- Defines the base package for the Spring Annotater -->
+        <context:component-scan base-package="com.syedatifakhtar" />        
+        <bean id="wicketApplication" class="com.syedatifakhtar.WicketApplication">
+            <property name="messengerService" ref="messengerService"></property>
+        </bean>
+       
+        <bean id="messengerService" class="com.syedatifakhtar.service.MessengerServiceImpl">
+            <property name="message" value="Welcome Cheesr Admin!"></property>
+        </bean>
+</beans>

@@ -1,0 +1,13 @@
+<ivy-module version="2.0">
+    <info organisation="com.syedatifakhtar" module="apache-wicket-dependencies"/>
+    <dependencies>
+    		<!--  WICKET DEPENDENCIES -->
+		<dependency org="org.apache.wicket" name = "wicket-core" rev="6.12.0"/>
+		<dependency org="org.apache.wicket" name = "wicket-spring" rev="6.12.0"/>
+		<dependency org="org.slf4j" name = "slf4j-log4j12" rev="1.6.4"/>
+		<dependency org="log4j" name = "log4j" rev="1.2.16"/>
+		<dependency org="junit" name = "junit" rev="4.11"/>
+		<dependency org="org.hibernate" name = "hibernate-core" rev="4.2.7.Final"/>
+		<dependency org="org.hibernate" name = "hibernate-entitymanager" rev="4.2.7.Final"/>
+	</dependencies>
+</ivy-module>

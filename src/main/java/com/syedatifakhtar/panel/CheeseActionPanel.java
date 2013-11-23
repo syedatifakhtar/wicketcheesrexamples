@@ -1,0 +1,146 @@
+package com.syedatifakhtar.panel;
+
+import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.behavior.AttributeAppender;
+import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.Button;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
+
+import com.syedatifakhtar.model.Cheese;
+
+public class CheeseActionPanel extends Panel {
+
+	private Button editCheeseButton;
+	private Button deleteCheeseButton;
+	private Button saveCheeseButton;
+	private Label cheeseName;
+	private Label cheeseDescription;
+	private TextField<Cheese> cheeseNameTextField;
+	private TextField<Cheese> cheeseDescriptionTextField;
+	private Form<Void> cheeseActionForm;
+	private Cheese cheese;
+
+	public enum Mode {
+		SHOW, EDIT, CREATE
+	}
+
+	private Mode mode;
+
+	public CheeseActionPanel(String id, Cheese cheese) {
+		super(id);
+		this.cheese = cheese;
+		this.mode = Mode.SHOW;
+		init();
+		toggleVisibility();
+		attachComponents();
+	}
+
+	public CheeseActionPanel(String id, Cheese cheese, Mode mode) {
+		super(id);
+		this.cheese = cheese;
+		this.mode = mode;
+		init();
+		toggleVisibility();
+		attachComponents();
+	}
+
+	private void toggleVisibility() {
+
+		AttributeAppender showComponent	=	new AttributeAppender("class", new Model<String>("unhide"), " ");
+		AttributeAppender hideComponent = new AttributeAppender("class", new Model<String>("hide"), " ");
+		switch (mode) {
+		case SHOW:
+			cheeseName.setVisible(true);
+			cheeseName.add(showComponent);
+			cheeseDescription.setVisible(true);
+			cheeseDescription.add(showComponent);
+			cheeseNameTextField.setVisible(false);
+			cheeseNameTextField.add(hideComponent);
+			cheeseDescriptionTextField.setVisible(false);
+			cheeseDescriptionTextField.add(hideComponent);
+			editCheeseButton.setVisible(true);
+			editCheeseButton.add(showComponent);
+			deleteCheeseButton.setVisible(true);
+			deleteCheeseButton.add(showComponent);
+			saveCheeseButton.setVisible(false);
+			saveCheeseButton.add(hideComponent);
+			break;
+		case CREATE:
+			;
+		case EDIT:
+			cheeseName.setVisible(false);
+			cheeseName.add(hideComponent);
+			cheeseDescription.setVisible(false);
+			cheeseDescription.add(hideComponent);
+			cheeseNameTextField.setVisible(true);
+			cheeseNameTextField.add(showComponent);
+			cheeseDescriptionTextField.setVisible(true);
+			cheeseDescriptionTextField.add(showComponent);
+			editCheeseButton.setVisible(false);
+			editCheeseButton.add(hideComponent);
+			deleteCheeseButton.setVisible(false);
+			deleteCheeseButton.add(hideComponent);
+			saveCheeseButton.setVisible(true);
+			saveCheeseButton.add(showComponent);
+		}
+	}
+
+	private void init() {
+		cheeseActionForm = new Form<Void>("cheeseActionForm");
+		cheeseActionForm.setOutputMarkupId(true);
+
+		cheeseName = new Label("cheeseName", new PropertyModel<Cheese>(cheese,
+				"name"));
+		cheeseDescription = new Label("cheeseDescription",
+				new PropertyModel<Cheese>(cheese, "description"));
+		cheeseDescription.setOutputMarkupId(true);
+
+		cheeseNameTextField = new TextField<Cheese>("cheeseNameTextField",
+				new PropertyModel<Cheese>(cheese, "name"));
+		cheeseNameTextField.setOutputMarkupId(true);
+
+		cheeseDescriptionTextField = new TextField<Cheese>(
+				"cheeseDescriptionTextField", new PropertyModel<Cheese>(cheese,
+						"description"));
+		cheeseDescriptionTextField.setOutputMarkupId(true);
+
+		editCheeseButton = new Button("editCheeseButton") {
+			public void onSubmit() {
+				mode = Mode.EDIT;
+				toggleVisibility();
+			};
+		};
+		editCheeseButton.setOutputMarkupId(true);
+
+		deleteCheeseButton = new Button("deleteCheeseButton") {
+			public void onSubmit() {
+				cheeseActionForm.add(new AttributeModifier("style",
+						"display:none"));
+			}
+		};
+		deleteCheeseButton.setOutputMarkupId(true);
+
+		saveCheeseButton = new Button("saveCheeseButton") {
+			public void onSubmit() {
+				mode = Mode.SHOW;
+				toggleVisibility();
+			}
+		};
+	}
+
+	private void attachComponents() {
+		cheeseActionForm.add(cheeseName);
+		cheeseActionForm.add(cheeseDescription);
+		cheeseActionForm.add(cheeseNameTextField);
+		cheeseActionForm.add(cheeseDescriptionTextField);
+		cheeseActionForm.add(editCheeseButton);
+		cheeseActionForm.add(deleteCheeseButton);
+		cheeseActionForm.add(saveCheeseButton);
+		add(cheeseActionForm);
+	}
+
+}
