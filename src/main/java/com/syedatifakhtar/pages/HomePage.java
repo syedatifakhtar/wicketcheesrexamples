@@ -5,14 +5,16 @@ import java.util.List;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
+import org.apache.wicket.injection.Injector;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.hibernate.Session;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.syedatifakhtar.BasePage;
 import com.syedatifakhtar.WicketApplication;
+import com.syedatifakhtar.DAO.CheeseDAO;
 import com.syedatifakhtar.model.Cheese;
 import com.syedatifakhtar.panel.CheeseActionPanel;
 
@@ -23,10 +25,15 @@ public class HomePage extends BasePage {
 	private final List<Cheese> cheeses;
 	private final AjaxFallbackLink<Void> addCheeseAjaxLink;
 	private final WebMarkupContainer cheeseRepeaterContainer;
-
+	
+	@SpringBean(name="cheeseDAO")
+	private CheeseDAO cheeseDAO;
+	
+	
 	public HomePage(final PageParameters parameters) {
 		super(parameters);
-
+		Injector.get().inject(this);
+		Injector.get().inject(this);
 		WicketApplication myApplication = (WicketApplication) getApplication();
 		messageFromService = myApplication.getMessengerService().getMessage();
 		System.out.println(messageFromService);
@@ -42,12 +49,8 @@ public class HomePage extends BasePage {
 				"cheeseRepeaterContainer"); //A hack to allow the repeater to repaint itself
 		cheeseRepeaterContainer.setOutputMarkupId(true);
 		
-		Session hibernateSession=myApplication.requestNewDatabaseSession();
-		hibernateSession.beginTransaction();
-		List result	=	hibernateSession.createQuery("from Cheese").list();
-		hibernateSession.getTransaction().commit();
-		hibernateSession.close();
-		for(Cheese cheese : (List<Cheese>)result) {
+		List<Cheese> cheeses	=	cheeseDAO.findAll();
+		for(Cheese cheese : cheeses) {
 			System.out.println("Cheese (" + cheese.getName() + " ," + cheese.getDescription() + ")");
 		}
 		addCheeseAjaxLink = new AjaxFallbackLink<Void>(
@@ -90,4 +93,14 @@ public class HomePage extends BasePage {
 		dummyCheeseList.add(dummyCheese);
 		return dummyCheeseList;
 	}
+
+	public CheeseDAO getCheeseDAO() {
+		return cheeseDAO;
+	}
+
+	public void setCheeseDAO(CheeseDAO cheeseDAO) {
+		this.cheeseDAO = cheeseDAO;
+	}
+	
+	
 }

@@ -62,5 +62,22 @@
 	<classpathentry kind="lib" path="lib/default/javassist-bundle-3.18.1-GA.jar"/>
 	<classpathentry kind="lib" path="lib/default/jboss-logging-jar-3.1.0.GA.jar"/>
 	<classpathentry kind="lib" path="lib/default/jboss-transaction-api_1.1_spec-jar-1.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="lib/default/hibernate-core-source-4.2.7.Final.jar"/>
+	<classpathentry kind="lib" path="lib/default/commons-dbcp-jar-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/default/commons-dbcp-javadoc-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/default/commons-dbcp-source-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/default/commons-pool-jar-1.5.4.jar"/>
+	<classpathentry kind="lib" path="lib/default/geronimo-jta_1.1_spec-jar-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/default/commons-logging-jar-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/default/spring-beans-jar-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/default/spring-core-jar-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/default/spring-jdbc-jar-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/default/spring-orm-jar-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/default/spring-tx-jar-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/default/javax.servlet-api-jar-3.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/default/spring-aop-jar-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/default/spring-context-jar-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/default/spring-expression-jar-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/default/spring-web-jar-3.2.5.RELEASE.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

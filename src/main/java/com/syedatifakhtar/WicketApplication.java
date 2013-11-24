@@ -7,9 +7,7 @@ import org.apache.wicket.settings.IResourceSettings;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.util.file.IResourceFinder;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import com.syedatifakhtar.pages.HomePage;
 import com.syedatifakhtar.service.MessengerService;
@@ -23,17 +21,6 @@ import com.syedatifakhtar.utils.MountedMapperWithoutPageComponentInfo;
  */
 @SuppressWarnings("all")
 public class WicketApplication extends WebApplication {
-
-	private SessionFactory hibernateSessionFactory;
-
-	public SessionFactory getHibernateSessionFactory() {
-		return hibernateSessionFactory;
-	}
-
-	public void setHibernateSessionFactory(
-			SessionFactory hibernateSessionFactory) {
-		this.hibernateSessionFactory = hibernateSessionFactory;
-	}
 
 	@SpringBean(name = "messengerService")
 	public MessengerService messengerService;
@@ -67,12 +54,6 @@ public class WicketApplication extends WebApplication {
 		resourceSettings.getResourceFinders().add(pageResources);
 		mount(new MountedMapperWithoutPageComponentInfo("/", HomePage.class));
 		
-		try {
-			initHibernate();
-		} catch (Exception e) {
-			System.out.println("Hibernate could not be initialized!");
-			e.printStackTrace();
-		}
 	}
 
 	public MessengerService getMessengerService() {
@@ -83,23 +64,4 @@ public class WicketApplication extends WebApplication {
 		this.messengerService = messengerService;
 	}
 
-	private void initHibernate() throws Exception {
-		hibernateSessionFactory = new Configuration().configure("/resources/hibernate.cfg.xml") // Use
-																	// bibernate.cfg.xml
-																	// to
-																	// configure
-																	// settings
-				.buildSessionFactory();
-	}
-
-	private void destroyHibernateFactory() {
-		if (hibernateSessionFactory != null) {
-			hibernateSessionFactory.close();
-		}
-	}
-
-	public Session requestNewDatabaseSession() {
-		Session session = hibernateSessionFactory.openSession();
-		return session;
-	}
 }
