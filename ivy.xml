@@ -9,5 +9,7 @@
 		<dependency org="junit" name = "junit" rev="4.11"/>
 		<dependency org="org.hibernate" name = "hibernate-core" rev="4.2.7.Final"/>
 		<dependency org="org.hibernate" name = "hibernate-entitymanager" rev="4.2.7.Final"/>
+		<dependency org="mysql" name = "mysql-connector-java" rev="5.1.9"/>
+		
 	</dependencies>
 </ivy-module>

@@ -10,6 +10,7 @@
     <property name="lib.dir" value="lib" />
     <property name="build.dir" value="build" />
     <property name="build.main.classes" value="${build.dir}/classes"/>
+    <property name="build.main.classes.meta" value="${build.dir}/classes/META-INF"/>
     <property name="build.test.classes" value="${build.dir}/test-classes" />
     <property name="build.test.reports" value="${build.dir}/test-reports" />
     <property name="build.reports.dir" value="${build.dir}/reports" />
@@ -48,6 +49,11 @@
             <fileset dir="${src.main.dir}">
                 <include name="**/*.*" />
                 <exclude name="**/*.java" />
+            </fileset>
+        </copy>
+        <copy todir="$build.main.classes}">
+            <fileset dir="${src.main.dir}/META-INF">
+                <include name="**/*.xml"></include>
             </fileset>
         </copy>
     </target>
@@ -106,6 +112,7 @@
                 <include name="**/*" />
                 <exclude name="**/web.xml" />
             </fileset>
+            <metainf file="persistence.xml"/>
         </war>
     </target>
 

@@ -9,6 +9,7 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.hibernate.Session;
 
 import com.syedatifakhtar.BasePage;
 import com.syedatifakhtar.WicketApplication;
@@ -40,6 +41,15 @@ public class HomePage extends BasePage {
 		cheeseRepeaterContainer = new WebMarkupContainer(
 				"cheeseRepeaterContainer"); //A hack to allow the repeater to repaint itself
 		cheeseRepeaterContainer.setOutputMarkupId(true);
+		
+		Session hibernateSession=myApplication.requestNewDatabaseSession();
+		hibernateSession.beginTransaction();
+		List result	=	hibernateSession.createQuery("from Cheese").list();
+		hibernateSession.getTransaction().commit();
+		hibernateSession.close();
+		for(Cheese cheese : (List<Cheese>)result) {
+			System.out.println("Cheese (" + cheese.getName() + " ," + cheese.getDescription() + ")");
+		}
 		addCheeseAjaxLink = new AjaxFallbackLink<Void>(
 				"addCheeseAjaxFallbackLink") {
 			@Override
