@@ -51,11 +51,6 @@
                 <exclude name="**/*.java" />
             </fileset>
         </copy>
-        <copy todir="$build.main.classes}">
-            <fileset dir="${src.main.dir}/META-INF">
-                <include name="**/*.xml"></include>
-            </fileset>
-        </copy>
     </target>
     
     <!-- Compiles JUnit test cases -->
