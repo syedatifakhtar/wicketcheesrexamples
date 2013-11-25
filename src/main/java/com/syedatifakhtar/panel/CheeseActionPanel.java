@@ -9,11 +9,15 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 
+import com.syedatifakhtar.DAO.CheeseService;
 import com.syedatifakhtar.model.Cheese;
 
 public class CheeseActionPanel extends Panel {
 
+	@SpringBean(name="cheeseService")
+	private CheeseService cheeseService;
 	private Button editCheeseButton;
 	private Button deleteCheeseButton;
 	private Button saveCheeseButton;
@@ -128,6 +132,7 @@ public class CheeseActionPanel extends Panel {
 
 		deleteCheeseButton = new Button("deleteCheeseButton") {
 			public void onSubmit() {
+				cheeseService.deleteCheese(cheese);
 				cheeseActionForm.add(new AttributeModifier("style",
 						"display:none"));								//Hide the record as a quick measure
 			}
@@ -136,6 +141,11 @@ public class CheeseActionPanel extends Panel {
 
 		saveCheeseButton = new Button("saveCheeseButton") {
 			public void onSubmit() {
+				if(mode==mode.CREATE) {
+					cheeseService.saveCheese(cheese);
+				}else if(mode==mode.EDIT) {
+					cheeseService.updateCheese(cheese);
+				}
 				mode = Mode.SHOW;
 				toggleVisibility();
 			}

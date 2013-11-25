@@ -48,6 +48,7 @@
 		    <property name="hibernateProperties">
 		      <value>
 		        hibernate.dialect=org.hibernate.dialect.MySQLDialect
+		        hbm2ddl.auto=create
 		      </value>
 		    </property>
 		  </bean>
@@ -59,6 +60,10 @@
 		  
 		  <bean id="cheeseDAO" class="com.syedatifakhtar.DAO.CheeseDAOImpl">
 		      <property name="mySessionFactory" ref="mySessionFactory"/>
+		  </bean>
+		  
+		 <bean id="cheeseService" class="com.syedatifakhtar.DAO.CheeseServiceImpl">
+		      <property name="cheeseDAO" ref="cheeseDAO"/>
 		  </bean>
 		   
 		  <!-- Activates annotation based transaction management -->

@@ -4,7 +4,8 @@ import java.util.List;
 
 import com.syedatifakhtar.model.Cheese;
 
-public interface CheeseDAO {
+public interface CheeseService {
+
 	
 	public List<Cheese> findAll();
 	public Cheese getCheese(long id);

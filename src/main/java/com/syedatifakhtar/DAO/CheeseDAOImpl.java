@@ -2,7 +2,6 @@ package com.syedatifakhtar.DAO;
 
 import java.util.List;
 
-import org.apache.wicket.injection.Injector;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -26,7 +25,37 @@ public class CheeseDAOImpl implements CheeseDAO{
 		List cheeses= session.createQuery("from Cheese").list();
 		return (List<Cheese>)cheeses;
 	}
+	
+	@Override
+	@Transactional
+	public Cheese getCheese(long id) {
+		Session session	=	mySessionFactory.getCurrentSession();
+		Cheese cheese=(Cheese)session.get(Cheese.class, new Long(id));
+		return cheese;
+	}
 
+	@Override
+	@Transactional
+	public long saveCheese(Cheese cheese) {
+		Session session	=	mySessionFactory.getCurrentSession();
+		Long generatedID=(Long)session.save(cheese);
+		return generatedID.longValue();
+	}
+
+	@Transactional
+	@Override
+	public  void updateCheese(Cheese cheese) {
+		Session session	=	mySessionFactory.getCurrentSession();
+		session.saveOrUpdate(cheese);
+	}
+	
+	@Transactional
+	@Override
+	public void deleteCheese(Cheese cheese) {
+		Session session	=	mySessionFactory.getCurrentSession();
+		session.delete(cheese);
+	}
+	
 	public SessionFactory getMySessionFactory() {
 		return mySessionFactory;
 	}
@@ -34,5 +63,6 @@ public class CheeseDAOImpl implements CheeseDAO{
 	public void setMySessionFactory(SessionFactory mySessionFactory) {
 		this.mySessionFactory = mySessionFactory;
 	}
+
 
 }

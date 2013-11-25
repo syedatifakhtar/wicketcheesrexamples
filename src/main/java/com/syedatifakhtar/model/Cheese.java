@@ -31,17 +31,9 @@ public class Cheese implements Serializable{
 		
 	}
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="MODIFIED_DATE")
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="ID")
 	public long getId() {
 		return id;
 	}
@@ -51,9 +43,13 @@ public class Cheese implements Serializable{
 	public String getName() {
 		return name;
 	}
+	
+	@Column(name="NAME")
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	@Column(name="DESCRIPTION")
 	public String getDescription() {
 		return description;
 	}
@@ -61,5 +57,12 @@ public class Cheese implements Serializable{
 		this.description = description;
 	}
 	
-	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="MODIFIED_DATE")
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
 }

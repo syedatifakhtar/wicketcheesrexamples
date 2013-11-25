@@ -15,6 +15,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import com.syedatifakhtar.BasePage;
 import com.syedatifakhtar.WicketApplication;
 import com.syedatifakhtar.DAO.CheeseDAO;
+import com.syedatifakhtar.DAO.CheeseService;
 import com.syedatifakhtar.model.Cheese;
 import com.syedatifakhtar.panel.CheeseActionPanel;
 
@@ -26,19 +27,18 @@ public class HomePage extends BasePage {
 	private final AjaxFallbackLink<Void> addCheeseAjaxLink;
 	private final WebMarkupContainer cheeseRepeaterContainer;
 	
-	@SpringBean(name="cheeseDAO")
-	private CheeseDAO cheeseDAO;
+	@SpringBean(name="cheeseService")
+	private CheeseService cheeseService;
 	
 	
 	public HomePage(final PageParameters parameters) {
 		super(parameters);
 		Injector.get().inject(this);
-		Injector.get().inject(this);
 		WicketApplication myApplication = (WicketApplication) getApplication();
 		messageFromService = myApplication.getMessengerService().getMessage();
 		System.out.println(messageFromService);
 		add(new Label("howdymessage", messageFromService));
-		cheeses = generateDummyCheeseList();
+		cheeses = cheeseService.findAll();
 		cheeseRepeater = new RepeatingView("cheeseRepeater");
 		for (Cheese cheese : cheeses) {
 			cheeseRepeater.add(new CheeseActionPanel(cheeseRepeater
@@ -48,11 +48,6 @@ public class HomePage extends BasePage {
 		cheeseRepeaterContainer = new WebMarkupContainer(
 				"cheeseRepeaterContainer"); //A hack to allow the repeater to repaint itself
 		cheeseRepeaterContainer.setOutputMarkupId(true);
-		
-		List<Cheese> cheeses	=	cheeseDAO.findAll();
-		for(Cheese cheese : cheeses) {
-			System.out.println("Cheese (" + cheese.getName() + " ," + cheese.getDescription() + ")");
-		}
 		addCheeseAjaxLink = new AjaxFallbackLink<Void>(
 				"addCheeseAjaxFallbackLink") {
 			@Override
@@ -94,13 +89,12 @@ public class HomePage extends BasePage {
 		return dummyCheeseList;
 	}
 
-	public CheeseDAO getCheeseDAO() {
-		return cheeseDAO;
+	public CheeseService getCheeseService() {
+		return cheeseService;
 	}
 
-	public void setCheeseDAO(CheeseDAO cheeseDAO) {
-		this.cheeseDAO = cheeseDAO;
+	public void setCheeseService(CheeseService cheeseService) {
+		this.cheeseService = cheeseService;
 	}
-	
 	
 }
