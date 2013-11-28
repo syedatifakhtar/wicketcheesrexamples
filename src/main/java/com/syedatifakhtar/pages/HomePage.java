@@ -1,6 +1,5 @@
 package com.syedatifakhtar.pages;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -14,9 +13,11 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.syedatifakhtar.BasePage;
 import com.syedatifakhtar.WicketApplication;
-import com.syedatifakhtar.DAO.CheeseDAO;
 import com.syedatifakhtar.DAO.CheeseService;
+import com.syedatifakhtar.DAO.OrderDAO;
 import com.syedatifakhtar.model.Cheese;
+import com.syedatifakhtar.model.CheeseOrder;
+import com.syedatifakhtar.model.Order;
 import com.syedatifakhtar.panel.CheeseActionPanel;
 
 public class HomePage extends BasePage {
@@ -30,7 +31,18 @@ public class HomePage extends BasePage {
 	@SpringBean(name="cheeseService")
 	private CheeseService cheeseService;
 	
+	@SpringBean(name="orderDAO")
+	private OrderDAO orderDAO;
 	
+	
+	public OrderDAO getOrderDAO() {
+		return orderDAO;
+	}
+
+	public void setOrderDAO(OrderDAO orderDAO) {
+		this.orderDAO = orderDAO;
+	}
+
 	public HomePage(final PageParameters parameters) {
 		super(parameters);
 		Injector.get().inject(this);
@@ -64,29 +76,19 @@ public class HomePage extends BasePage {
 		add(addCheeseAjaxLink);
 		cheeseRepeaterContainer.add(cheeseRepeater);
 		add(cheeseRepeaterContainer);
+		printDummyOrders();
 
 	}
 
-	public List<Cheese> generateDummyCheeseList() {
-		List<Cheese> dummyCheeseList;
-		dummyCheeseList = new ArrayList<Cheese>();
-		Cheese dummyCheese = new Cheese();
-		dummyCheese.setName("Gouda");
-		dummyCheese.setDescription("Most popular - your basic fare");
-		dummyCheeseList.add(dummyCheese);
-		dummyCheese = new Cheese();
-		dummyCheese.setName("Blue Cheese");
-		dummyCheese.setDescription("Its blue its tasty!");
-		dummyCheeseList.add(dummyCheese);
-		dummyCheese = new Cheese();
-		dummyCheese.setName("Cheddar");
-		dummyCheese.setDescription("Makes your pizza better!");
-		dummyCheeseList.add(dummyCheese);
-		dummyCheese = new Cheese();
-		dummyCheese.setName("Mozzarella");
-		dummyCheese.setDescription("FRESH!");
-		dummyCheeseList.add(dummyCheese);
-		return dummyCheeseList;
+	public void printDummyOrders() {
+		
+		for(Order order:orderDAO.findall()) {
+			System.out.println("OrderID :" + Long.toString(order.getOrderID()) + " BY: " + order.getPersonName());
+			System.out.println("Bought");
+			for(CheeseOrder cheeseOrder:order.getCheeseOrder()){
+				System.out.println("CHEESE NAME: " + cheeseOrder.getPk().getCheese().getName() + " QUANTITY: " + cheeseOrder.getQuantity());
+			}
+		}
 	}
 
 	public CheeseService getCheeseService() {
