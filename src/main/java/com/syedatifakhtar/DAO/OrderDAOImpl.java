@@ -12,10 +12,8 @@ import com.syedatifakhtar.model.Order;
 public class OrderDAOImpl implements OrderDAO{
 
 	
-	@SpringBean(name="mySessionFactory")
 	private SessionFactory mySessionFactory;
 	
-	@Transactional
 	@Override
 	public List<Order> findall() {
 		Session	session = mySessionFactory.getCurrentSession();
@@ -31,8 +29,9 @@ public class OrderDAOImpl implements OrderDAO{
 
 	@Override
 	public long saveOrder(Order order) {
-		// TODO Auto-generated method stub
-		return 0;
+		Session session = mySessionFactory.getCurrentSession();
+		Long generatedId=(Long)session.save(order);
+		return generatedId.longValue();
 	}
 
 	@Override

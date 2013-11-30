@@ -1,6 +1,9 @@
 package com.syedatifakhtar.pages;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
@@ -13,6 +16,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.syedatifakhtar.BasePage;
 import com.syedatifakhtar.WicketApplication;
+import com.syedatifakhtar.DAO.CheeseOrderService;
 import com.syedatifakhtar.DAO.CheeseService;
 import com.syedatifakhtar.DAO.OrderDAO;
 import com.syedatifakhtar.model.Cheese;
@@ -30,6 +34,9 @@ public class HomePage extends BasePage {
 	
 	@SpringBean(name="cheeseService")
 	private CheeseService cheeseService;
+	
+	@SpringBean(name="cheeseOrderService")
+	private CheeseOrderService cheeseOrderService;
 	
 	@SpringBean(name="orderDAO")
 	private OrderDAO orderDAO;
@@ -76,13 +83,14 @@ public class HomePage extends BasePage {
 		add(addCheeseAjaxLink);
 		cheeseRepeaterContainer.add(cheeseRepeater);
 		add(cheeseRepeaterContainer);
+		createDummyOrders();
 		printDummyOrders();
 
 	}
 
 	public void printDummyOrders() {
 		
-		for(Order order:orderDAO.findall()) {
+		for(Order order:cheeseOrderService.findall()) {
 			System.out.println("OrderID :" + Long.toString(order.getOrderID()) + " BY: " + order.getPersonName());
 			System.out.println("Bought");
 			for(CheeseOrder cheeseOrder:order.getCheeseOrder()){
@@ -91,6 +99,22 @@ public class HomePage extends BasePage {
 		}
 	}
 
+	public void createDummyOrders() {
+		
+		Order order = new Order();
+		order.setCreatedDate(new Date());
+		order.setPersonName("Atif");
+		order.setPersonPhone("7840847298");
+		
+		Map<Cheese,Integer> cheeseQuantityHashMap	=	new HashMap<Cheese,Integer>();
+		for(Cheese cheese:cheeseService.findAll()) {
+			int randomNumber	=	1 + (int)(Math.random() * 24);
+			cheeseQuantityHashMap.put(cheese,new Integer(randomNumber));
+		}
+		
+		cheeseOrderService.saveOrder(order, cheeseQuantityHashMap);
+		
+	}
 	public CheeseService getCheeseService() {
 		return cheeseService;
 	}

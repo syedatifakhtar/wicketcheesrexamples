@@ -15,7 +15,6 @@ public class CheeseDAOImpl implements CheeseDAO{
 	@SpringBean(name="mySessionFactory")
 	private SessionFactory mySessionFactory;
 	
-	@Transactional
 	@Override
 	public List<Cheese> findAll() {
 		if(mySessionFactory==null) {
@@ -27,7 +26,6 @@ public class CheeseDAOImpl implements CheeseDAO{
 	}
 	
 	@Override
-	@Transactional
 	public Cheese getCheese(long id) {
 		Session session	=	mySessionFactory.getCurrentSession();
 		Cheese cheese=(Cheese)session.get(Cheese.class, new Long(id));
@@ -35,21 +33,18 @@ public class CheeseDAOImpl implements CheeseDAO{
 	}
 
 	@Override
-	@Transactional
 	public long saveCheese(Cheese cheese) {
 		Session session	=	mySessionFactory.getCurrentSession();
 		Long generatedID=(Long)session.save(cheese);
 		return generatedID.longValue();
 	}
 
-	@Transactional
 	@Override
 	public  void updateCheese(Cheese cheese) {
 		Session session	=	mySessionFactory.getCurrentSession();
 		session.saveOrUpdate(cheese);
 	}
 	
-	@Transactional
 	@Override
 	public void deleteCheese(Cheese cheese) {
 		Session session	=	mySessionFactory.getCurrentSession();

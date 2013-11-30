@@ -1,7 +1,6 @@
 package com.syedatifakhtar.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
@@ -10,8 +9,6 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
@@ -39,6 +36,20 @@ public class CheeseOrder implements Serializable{
 		return getPk().getCheese();
 	}
 
+	
+	public void setCheese(Cheese cheese) {
+		getPk().setCheese(cheese);
+	}
+
+	@Transient
+	public Order getOrder() {
+		return getPk().getOrder();
+	}
+	
+	public void setOrder(Order order) {
+		getPk().setOrder(order);
+	}
+	
 	@Column(name="QUANTITY",nullable=false)
 	public int getQuantity() {
 		return quantity;
@@ -47,7 +58,7 @@ public class CheeseOrder implements Serializable{
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
+
 	public boolean equals(Object o) {
 		if(this==o) 
 			return true;

@@ -20,7 +20,6 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="order", catalog = "atif")
-
 public class Order implements Serializable{
 	
 	private long orderID;
