@@ -1,16 +1,19 @@
 package com.syedatifakhtar;
 
+import org.apache.wicket.Session;
 import org.apache.wicket.core.util.file.WebApplicationPath;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.request.Request;
+import org.apache.wicket.request.Response;
 import org.apache.wicket.settings.IResourceSettings;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.util.file.IResourceFinder;
-import org.hibernate.SessionFactory;
 
 import com.syedatifakhtar.pages.HomePage;
 import com.syedatifakhtar.service.MessengerService;
+import com.syedatifakhtar.session.CheesrSession;
 import com.syedatifakhtar.utils.MountedMapperWithoutPageComponentInfo;
 
 /**
@@ -31,6 +34,12 @@ public class WicketApplication extends WebApplication {
 	@Override
 	public Class<? extends WebPage> getHomePage() {
 		return HomePage.class;
+	}
+	
+	@Override
+	public Session newSession(Request request, Response response) {
+		// TODO Auto-generated method stub
+		return new CheesrSession(request);
 	}
 
 	/**

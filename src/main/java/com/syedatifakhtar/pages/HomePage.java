@@ -83,7 +83,6 @@ public class HomePage extends BasePage {
 		add(addCheeseAjaxLink);
 		cheeseRepeaterContainer.add(cheeseRepeater);
 		add(cheeseRepeaterContainer);
-		createDummyOrders();
 		printDummyOrders();
 
 	}

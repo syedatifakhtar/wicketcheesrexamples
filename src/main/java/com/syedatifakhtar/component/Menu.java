@@ -10,6 +10,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.PropertyModel;
 
+import com.syedatifakhtar.pages.CheeseShoppingPage;
 import com.syedatifakhtar.pages.HomePage;
 
 public class Menu extends Panel{
@@ -32,6 +33,8 @@ public class Menu extends Panel{
 	private void createMenuItems() {
 		menuItems	=	new ArrayList<MenuItem>();
 		MenuItem menuItem	=	new MenuItem("Cheesr", HomePage.class);
+		menuItems.add(menuItem);
+		menuItem	=	new MenuItem("Shop", CheeseShoppingPage.class);
 		menuItems.add(menuItem);
 	}
 	

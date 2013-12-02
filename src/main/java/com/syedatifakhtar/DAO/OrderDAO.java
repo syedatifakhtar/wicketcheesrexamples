@@ -9,10 +9,13 @@ import com.syedatifakhtar.model.Order;
 
 public interface OrderDAO {
 
-	public List<Order> findall();
-	public Order getOrder(long id);
-	public long saveOrder(Order order);
-	public void updateOrder(Order order);
-	public void deleteOrder(Order order);
+	/*
+	 * @return List<Order>
+	 */
+	List<Order> findall();
+	Order getOrder(long id);
+	long saveOrder(Order order);
+	void updateOrder(Order order);
+	void deleteOrder(Order order);
 
 }
