@@ -10,18 +10,18 @@ import com.syedatifakhtar.DAO.CheesrCartImpl;
 
 public class CheesrSession extends WebSession{
 
-	CheesrCart cheeseCartService;
+	CheesrCart cheesrCart;
 	public CheesrSession(Request request) {
 		super(request);
 		init();
 	}
 	
 	public void init() {
-		cheeseCartService	=	new CheesrCartImpl();
+		cheesrCart	=	new CheesrCartImpl();
 	}
 	
 	public CheesrCart getCart() {
-		return cheeseCartService;
+		return cheesrCart;
 	}
 
 }

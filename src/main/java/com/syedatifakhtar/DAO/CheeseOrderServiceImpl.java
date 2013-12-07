@@ -44,14 +44,18 @@ public class CheeseOrderServiceImpl implements CheeseOrderService{
 	public long saveOrder(Order order,Map<Cheese,Integer> cheeseQuantityMap) {
 		Set<CheeseOrder> cheeseOrders	=	order.getCheeseOrder();
 		CheeseOrder cheeseOrder;
+		long total = 0;
 		for(Cheese cheese: cheeseQuantityMap.keySet()) {
 			System.out.println("Savin cheese order for " + order.getPersonName() + " Cheese: " + cheese.getName() + " QUantity: " + cheeseQuantityMap.get(cheese));
 			cheeseOrder	=	new CheeseOrder();
 			cheeseOrder.setOrder(order);
 			cheeseOrder.setCheese(cheese);
 			cheeseOrder.setQuantity(cheeseQuantityMap.get(cheese));
+			cheeseOrder.setItemPrice(cheese.getPrice());
 			cheeseOrders.add(cheeseOrder);
+			total	= total + cheeseQuantityMap.get(cheese) * cheese.getPrice();	
 		}
+		order.setTotal(total);
 		long orderid= orderDAO.saveOrder(order);
 		
 		System.out.println("OrderId--->" + orderid);

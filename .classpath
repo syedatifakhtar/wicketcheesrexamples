@@ -79,5 +79,12 @@
 	<classpathentry kind="lib" path="lib/default/spring-context-jar-3.2.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/default/spring-expression-jar-3.2.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/default/spring-web-jar-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/default/aspectjrt-jar-1.6.11.jar"/>
+	<classpathentry kind="lib" path="lib/default/aspectjweaver-jar-1.6.11.jar"/>
+	<classpathentry kind="lib" path="lib/default/jackson-core-asl-jar-1.8.5.jar"/>
+	<classpathentry kind="lib" path="lib/default/jackson-mapper-asl-jar-1.8.5.jar"/>
+	<classpathentry kind="lib" path="lib/default/wicket-extensions-jar-6.12.0.jar"/>
+	<classpathentry kind="lib" path="lib/default/wicket-extensions-javadoc-6.12.0.jar"/>
+	<classpathentry kind="lib" path="lib/default/wicket-extensions-source-6.12.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

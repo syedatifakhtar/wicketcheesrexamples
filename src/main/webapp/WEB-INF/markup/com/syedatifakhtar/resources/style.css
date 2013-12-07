@@ -92,6 +92,24 @@ a:focus
 }
 .qty-input-small {
     float: left;
-    margin-left: 20%;
-    width: 25px;
+    margin-left: 15%;
+    text-align: right;
+    width: 5%;
+    min-width:40px;
+}
+.cheese-tbl {
+	display:table;
+	width:100%;
+}
+.cheese-tbl-row {
+	color:#33B5E5;
+	width:100%;
+	display:table-row;
+}
+.cheese-tbl-cell {
+	display:table-cell;
+}
+.modal-window-container {
+	overflow:hidden;
+	width:550px;
 }

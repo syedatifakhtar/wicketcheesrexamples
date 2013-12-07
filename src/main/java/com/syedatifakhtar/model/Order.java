@@ -26,6 +26,7 @@ public class Order implements Serializable{
 	private String personName;
 	private String personPhone;
 	private Date createdDate;
+	private long total;
 	
 	private Set<CheeseOrder> cheeseOrder	=	new HashSet<CheeseOrder>(0);
 	
@@ -81,8 +82,14 @@ public class Order implements Serializable{
 	public void setCheeseOrder(Set<CheeseOrder> CheeseOrder) {
 		this.cheeseOrder = CheeseOrder;
 	}
-	
-	
-	
+
+	@Column(name="TOTAL")
+	public long getTotal() {
+		return total;
+	}
+
+	public void setTotal(long total) {
+		this.total = total;
+	}
 
 }

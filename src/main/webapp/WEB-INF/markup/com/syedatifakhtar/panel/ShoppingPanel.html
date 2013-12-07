@@ -5,13 +5,21 @@
 	</head>
 	<body>
 		<wicket:panel>
-			<form class="cheese-actn-pnl-container form-inline" wicket:id="cheeseShoppingForm">
-				<span class="cheese-txt inline " wicket:id="cheeseName"/>
-				<span class="cheese-txt inline " wicket:id="cheeseDescription"/>
-				<input wicket:id="cheeseQuantityTextField" type="text" class="input-small inline qty-input-small " placeholder="1" maxlength="5"/>
-				<div class="cheese-actn-btn-group btn-group-xs">
-				 <button type="button" class="btn-link inline" wicket:id="addCheeseButton">+</button>
-				 <button type="button" class="btn-link" wicket:id="removeCheeseButton" >x</button>
+			<form class="input-group-sm" wicket:id="cheeseShoppingForm" style="min-height:45px;width:100%;">
+				<div class="col-md-2" wicket:id="cheeseName"/>
+				<div class="col-md-4" wicket:id="cheeseDescription"/>
+				<div class="col-md-2">
+					<span>$</span>
+					<span wicket:id="cheesePrice"/>
+				</div>
+				<div class="col-md-2">
+					<input wicket:id="cheeseQuantityTextField" type="text" class="form-control" placeholder="1" maxlength="5"/>
+				</div>
+				<div class="col-md-2">
+					<div class="button-group-xs" style="float:right">
+				 		<button type="button" class="btn-link inline" wicket:id="addCheeseButton">+</button>
+				 		<button type="button" class="btn-link" wicket:id="removeCheeseButton" >x</button>
+				 	</div>
 				</div>
 			</form>
 		</wicket:panel>

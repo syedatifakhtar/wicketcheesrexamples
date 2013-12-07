@@ -21,14 +21,16 @@ public class ShoppingPanel extends Panel{
 	
 	private Label cheeseName;
 	private Label cheeseDescription;
+	private Label cheesePrice;
 	private TextField<Integer> cheeseQuantityTextField;
-	private final Integer cheeseQuantity = 1;
+	private Integer cheeseQuantity = 1;
 	private AjaxFallbackButton addCheeseButton;
 	private AjaxFallbackButton removeCheeseButton;
 	private Form<Void> cheeseShoppingForm;
 	private Cheese cheese;
 	private boolean hasBought = false;
 	private CheesrCartActionListener cheesrCartOrderListener;
+	private boolean isViewModeOnly=false;
 	
 	
 	public ShoppingPanel(String id,Cheese cheese) {
@@ -40,12 +42,24 @@ public class ShoppingPanel extends Panel{
 		toggleComponentVisibility();
 	}
 	
+	public ShoppingPanel(String id,Cheese cheese,Integer quantity,boolean isViewModeOnly) {
+		super(id);
+		this.cheese=cheese;
+		this.isViewModeOnly=isViewModeOnly;
+		hasBought=isViewModeOnly;
+		init();
+		System.out.println("Instantiated ShoppingPanel with viewOnly mode!");
+		this.cheeseQuantity=quantity;
+		attachComponents();
+		toggleComponentVisibility();
+	}
+	
 	
 	private void init() {
 		cheeseName = new Label("cheeseName", new PropertyModel<Cheese>(cheese,"name"));
 		cheeseDescription = new Label("cheeseDescription", new PropertyModel<Cheese>(cheese,"description"));
 		cheeseQuantityTextField	=	new TextField<Integer>("cheeseQuantityTextField", new PropertyModel<Integer>(this,"cheeseQuantity"));
-		
+		cheesePrice	=	new Label("cheesePrice", new PropertyModel<Cheese>(cheese, "price"));
 		cheeseShoppingForm	=	new Form<Void>("cheeseShoppingForm");
 		
 		addCheeseButton	=	new AjaxFallbackButton("addCheeseButton",cheeseShoppingForm) {
@@ -67,6 +81,13 @@ public class ShoppingPanel extends Panel{
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				super.onSubmit(target, form);
+				if(isViewModeOnly) {
+					hide();
+					if(cheesrCartOrderListener!=null)
+						cheesrCartOrderListener.removeCheese(cheese);
+					target.add(cheeseShoppingForm);
+					return;
+				}
 				if(cheesrCartOrderListener!=null) {
 					cheesrCartOrderListener.removeCheese(cheese);
 				}
@@ -90,11 +111,15 @@ public class ShoppingPanel extends Panel{
 		return cheeseQuantity;
 	}
 
+	private void hide() {
+		cheeseShoppingForm.setVisible(false);
+	}
 
 	private void attachComponents() {
 		cheeseShoppingForm.add(cheeseName);
 		cheeseShoppingForm.add(cheeseDescription);
 		cheeseShoppingForm.add(cheeseQuantityTextField);
+		cheeseShoppingForm.add(cheesePrice);
 		cheeseShoppingForm.add(addCheeseButton);
 		cheeseShoppingForm.add(removeCheeseButton);
 		add(cheeseShoppingForm);

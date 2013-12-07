@@ -26,7 +26,10 @@ public class Cheese implements Serializable{
 	private String name;
 	private String description;
 	private Date modifiedDate;
+	private int price;
 	
+
+
 	public Cheese() {
 		
 	}
@@ -64,5 +67,14 @@ public class Cheese implements Serializable{
 	}
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
+	}
+	
+	@Column(name="PRICE")
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 }

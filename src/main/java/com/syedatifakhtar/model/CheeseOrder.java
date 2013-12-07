@@ -21,7 +21,9 @@ public class CheeseOrder implements Serializable{
 
 	private CheeseOrderID pk	=	new CheeseOrderID();
 	private int quantity;
+	private int itemPrice;
 	
+
 	@EmbeddedId
 	public CheeseOrderID getPk() {
 		return pk;
@@ -57,6 +59,15 @@ public class CheeseOrder implements Serializable{
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	
+	@Column(name="ITEMPRICE", nullable=false)
+	public int getItemPrice() {
+		return itemPrice;
+	}
+
+	public void setItemPrice(int itemPrice) {
+		this.itemPrice = itemPrice;
 	}
 
 	public boolean equals(Object o) {

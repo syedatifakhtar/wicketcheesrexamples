@@ -16,7 +16,7 @@ import com.syedatifakhtar.model.Cheese;
 
 public class CheeseActionPanel extends Panel {
 
-	@SpringBean(name="cheeseService")
+	@SpringBean(name = "cheeseService")
 	private CheeseService cheeseService;
 	private Button editCheeseButton;
 	private Button deleteCheeseButton;
@@ -25,6 +25,7 @@ public class CheeseActionPanel extends Panel {
 	private Label cheeseDescription;
 	private TextField<Cheese> cheeseNameTextField;
 	private TextField<Cheese> cheeseDescriptionTextField;
+	private TextField<Cheese> cheesePriceTextField;
 	private Form<Void> cheeseActionForm;
 	private Cheese cheese;
 
@@ -58,7 +59,7 @@ public class CheeseActionPanel extends Panel {
 	 */
 	private void toggleVisibility() {
 
-		//Append display:block or display:hidden to hide content
+		// Append display:block or display:hidden to hide content
 		AttributeAppender showComponent = new AttributeAppender("class",
 				new Model<String>("unhide"), " ");
 		AttributeAppender hideComponent = new AttributeAppender("class",
@@ -73,6 +74,8 @@ public class CheeseActionPanel extends Panel {
 			cheeseNameTextField.add(hideComponent);
 			cheeseDescriptionTextField.setVisible(false);
 			cheeseDescriptionTextField.add(hideComponent);
+			cheesePriceTextField.setVisible(true);
+			cheesePriceTextField.setEnabled(false);
 			editCheeseButton.setVisible(true);
 			editCheeseButton.add(showComponent);
 			deleteCheeseButton.setVisible(true);
@@ -91,6 +94,8 @@ public class CheeseActionPanel extends Panel {
 			cheeseNameTextField.add(showComponent);
 			cheeseDescriptionTextField.setVisible(true);
 			cheeseDescriptionTextField.add(showComponent);
+			cheesePriceTextField.setVisible(true);
+			cheesePriceTextField.setEnabled(true);
 			editCheeseButton.setVisible(false);
 			editCheeseButton.add(hideComponent);
 			deleteCheeseButton.setVisible(false);
@@ -122,6 +127,10 @@ public class CheeseActionPanel extends Panel {
 						"description"));
 		cheeseDescriptionTextField.setOutputMarkupId(true);
 
+		cheesePriceTextField = new TextField<Cheese>("cheesePriceTextField",
+				new PropertyModel<Cheese>(cheese, "price"));
+		cheesePriceTextField.setOutputMarkupId(true);
+
 		editCheeseButton = new Button("editCheeseButton") {
 			public void onSubmit() {
 				mode = Mode.EDIT;
@@ -134,16 +143,16 @@ public class CheeseActionPanel extends Panel {
 			public void onSubmit() {
 				cheeseService.deleteCheese(cheese);
 				cheeseActionForm.add(new AttributeModifier("style",
-						"display:none"));								//Hide the record as a quick measure
+						"display:none")); // Hide the record as a quick measure
 			}
 		};
 		deleteCheeseButton.setOutputMarkupId(true);
 
 		saveCheeseButton = new Button("saveCheeseButton") {
 			public void onSubmit() {
-				if(mode==mode.CREATE) {
+				if (mode == mode.CREATE) {
 					cheeseService.saveCheese(cheese);
-				}else if(mode==mode.EDIT) {
+				} else if (mode == mode.EDIT) {
 					cheeseService.updateCheese(cheese);
 				}
 				mode = Mode.SHOW;
@@ -155,12 +164,13 @@ public class CheeseActionPanel extends Panel {
 	/**
 	 * Attach components to form and form to the page
 	 */
-			
+
 	private void attachComponents() {
 		cheeseActionForm.add(cheeseName);
 		cheeseActionForm.add(cheeseDescription);
 		cheeseActionForm.add(cheeseNameTextField);
 		cheeseActionForm.add(cheeseDescriptionTextField);
+		cheeseActionForm.add(cheesePriceTextField);
 		cheeseActionForm.add(editCheeseButton);
 		cheeseActionForm.add(deleteCheeseButton);
 		cheeseActionForm.add(saveCheeseButton);

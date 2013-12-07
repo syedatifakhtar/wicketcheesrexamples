@@ -6,15 +6,16 @@
 	<body>
 		<wicket:extend>
 			<div class="container">
+				<div wicket:id="checkoutModalWindow"/>
 				<span style="font-size:2em;color:#A6C">Welcome cheese shopper!</span>
-				<div wicket:id="shoppingItemRepeaterContainer">
+				<div wicket:id="shoppingItemRepeaterContainer" class="container">
 					<ul>
-						<li wicket:id="shoppingItemRepeater"></li>
+						<li wicket:id="shoppingItemRepeater" class="row"></li>
 					</ul>
 				</div>
 				<form wicket:id="checkoutForm">
 				<div class="btn-group-xs">
-					 <button type="Submit" class="btn btn-primary" style="float:right;" wicket:id="checkoutButton">Checkout</button>
+					 <button type="Submit" class="btn btn-primary" style="float:right;" wicket:id="checkoutButton">Review Cart</button>
 				</div>
 				</form>
 			</div>

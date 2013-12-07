@@ -4,10 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
-
 import com.syedatifakhtar.model.Cheese;
 import com.syedatifakhtar.model.Order;
 

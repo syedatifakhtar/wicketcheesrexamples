@@ -11,6 +11,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.util.file.IResourceFinder;
 
+import com.syedatifakhtar.pages.CheeseShoppingPage;
 import com.syedatifakhtar.pages.HomePage;
 import com.syedatifakhtar.service.MessengerService;
 import com.syedatifakhtar.session.CheesrSession;
@@ -62,6 +63,7 @@ public class WicketApplication extends WebApplication {
 		System.out.println("Using resource path: " + webAppPath.toString());
 		resourceSettings.getResourceFinders().add(pageResources);
 		mount(new MountedMapperWithoutPageComponentInfo("/", HomePage.class));
+		mount(new MountedMapperWithoutPageComponentInfo("/ShoppingPage", CheeseShoppingPage.class));
 		
 	}
 
