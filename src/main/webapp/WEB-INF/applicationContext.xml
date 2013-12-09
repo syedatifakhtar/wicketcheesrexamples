@@ -21,8 +21,19 @@
         
         <!-- <context:property-placeholder location="classpath*:*.properties" />  -->
         
+        
         <!-- Defines the base package for the Spring Annotater -->
-        <context:component-scan base-package="com.syedatifakhtar" />        
+        <context:component-scan base-package="com.syedatifakhtar" />
+        
+        <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="locations">
+				<list>
+					<value>classpath:com/syedatifakhtar/mail.properties</value>
+				</list>
+			</property>
+		<property name="ignoreUnresolvablePlaceholders" value="true"/>
+		</bean>
+
         <bean id="wicketApplication" class="com.syedatifakhtar.WicketApplication">
             <property name="messengerService" ref="messengerService"></property>
         </bean>
@@ -83,6 +94,21 @@
 		  <!-- Activates annotation based transaction management -->
 		  <tx:annotation-driven transaction-manager="transactionManager"/>
 		  
+	    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	        <property name="host" value="${mail.host}"/>
+	        <property name="port" value="${mail.port}"/>
+	        <property name="username" value="${mail.username}"/>
+	        <property name="password" value="${mail.password}"/>
+	        <property name="javaMailProperties">
+	            <props>
+	                <prop key="mail.transport.protocol">${mail.transport.protocol}</prop>
+	                <prop key="mail.smtp.auth">${mail.smtp.aut}</prop>
+	                <prop key="mail.smtp.starttls.enable">${mail.smtp.starttls.enable}</prop>
+	                <prop key="mail.debug">${mail.debug}</prop>
+	            </props>
+	        </property>
+	    </bean>
+			  
 		  <bean id="cheeseOrderDebugger" class="com.syedatifakhtar.AOP.CheeseOrderDebugger"/>
 		 <aop:config>
 		     <aop:aspect ref="cheeseOrderDebugger">
