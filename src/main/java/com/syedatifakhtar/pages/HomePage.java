@@ -16,13 +16,13 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.syedatifakhtar.BasePage;
 import com.syedatifakhtar.WicketApplication;
-import com.syedatifakhtar.DAO.CheeseOrderService;
-import com.syedatifakhtar.DAO.CheeseService;
-import com.syedatifakhtar.DAO.OrderDAO;
+import com.syedatifakhtar.dao.OrderDAO;
 import com.syedatifakhtar.model.Cheese;
 import com.syedatifakhtar.model.CheeseOrder;
 import com.syedatifakhtar.model.Order;
 import com.syedatifakhtar.panel.CheeseActionPanel;
+import com.syedatifakhtar.service.CheeseOrderService;
+import com.syedatifakhtar.service.CheeseService;
 
 public class HomePage extends BasePage {
 	private static final long serialVersionUID = 1L;

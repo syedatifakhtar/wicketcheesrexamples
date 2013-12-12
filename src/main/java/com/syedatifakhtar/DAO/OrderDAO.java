@@ -1,4 +1,4 @@
-package com.syedatifakhtar.DAO;
+package com.syedatifakhtar.dao;
 
 import java.util.List;
 

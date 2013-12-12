@@ -1,10 +1,8 @@
 package com.syedatifakhtar.pages;
 import java.util.Map;
 
-import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
-import org.apache.wicket.extensions.ajax.markup.html.AjaxLazyLoadPanel;
 import org.apache.wicket.injection.Injector;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.Form;
@@ -13,13 +11,13 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.syedatifakhtar.BasePage;
-import com.syedatifakhtar.DAO.CheeseOrderService;
-import com.syedatifakhtar.DAO.CheeseService;
-import com.syedatifakhtar.DAO.CheesrCart;
-import com.syedatifakhtar.DAO.CheesrCartActionListener;
+import com.syedatifakhtar.cart.CheesrCart;
+import com.syedatifakhtar.cart.CheesrCartActionListener;
 import com.syedatifakhtar.model.Cheese;
 import com.syedatifakhtar.panel.CheckoutModalWindowPanel;
 import com.syedatifakhtar.panel.ShoppingPanel;
+import com.syedatifakhtar.service.CheeseOrderService;
+import com.syedatifakhtar.service.CheeseService;
 import com.syedatifakhtar.session.CheesrSession;
 
 public class CheeseShoppingPage extends BasePage{

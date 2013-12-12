@@ -11,8 +11,8 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
-import com.syedatifakhtar.DAO.CheeseService;
 import com.syedatifakhtar.model.Cheese;
+import com.syedatifakhtar.service.CheeseService;
 
 public class CheeseActionPanel extends Panel {
 

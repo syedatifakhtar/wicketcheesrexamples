@@ -7,14 +7,9 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
-import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.syedatifakhtar.DAO.CheesrCart;
-import com.syedatifakhtar.DAO.CheeseOrderService;
-import com.syedatifakhtar.DAO.CheesrCartActionListener;
+import com.syedatifakhtar.cart.CheesrCartActionListener;
 import com.syedatifakhtar.model.Cheese;
 
 public class ShoppingPanel extends Panel{

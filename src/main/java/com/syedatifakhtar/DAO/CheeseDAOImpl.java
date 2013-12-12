@@ -1,4 +1,4 @@
-package com.syedatifakhtar.DAO;
+package com.syedatifakhtar.dao;
 
 import java.util.List;
 
@@ -17,9 +17,6 @@ public class CheeseDAOImpl implements CheeseDAO{
 	
 	@Override
 	public List<Cheese> findAll() {
-		if(mySessionFactory==null) {
-			System.out.println("SessionFactory is null!!!");
-		}
 		Session session	=	mySessionFactory.getCurrentSession();
 		List cheeses= session.createQuery("from Cheese").list();
 		return (List<Cheese>)cheeses;

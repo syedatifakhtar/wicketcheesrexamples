@@ -13,6 +13,8 @@ import org.apache.wicket.util.file.IResourceFinder;
 
 import com.syedatifakhtar.pages.CheeseShoppingPage;
 import com.syedatifakhtar.pages.HomePage;
+import com.syedatifakhtar.pages.RegistrationPage;
+import com.syedatifakhtar.pages.SignInPage;
 import com.syedatifakhtar.service.MessengerService;
 import com.syedatifakhtar.session.CheesrSession;
 import com.syedatifakhtar.utils.MountedMapperWithoutPageComponentInfo;
@@ -64,6 +66,8 @@ public class WicketApplication extends WebApplication {
 		resourceSettings.getResourceFinders().add(pageResources);
 		mount(new MountedMapperWithoutPageComponentInfo("/", HomePage.class));
 		mount(new MountedMapperWithoutPageComponentInfo("/ShoppingPage", CheeseShoppingPage.class));
+		mount(new MountedMapperWithoutPageComponentInfo("/SignIn", SignInPage.class));
+		mount(new MountedMapperWithoutPageComponentInfo("/Register", RegistrationPage.class));
 		
 	}
 

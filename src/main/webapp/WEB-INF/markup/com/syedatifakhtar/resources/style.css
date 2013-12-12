@@ -20,7 +20,7 @@ input[type="text"]
     padding:5% auto;
     list-style:none; 
     padding-top:8px;
-    width:400px;
+    width:100%;
     
     height:auto;
 }

@@ -43,7 +43,7 @@
         </bean>
         
         <!-- JDBC Data Source. It is assumed you have MySQL running on localhost port 3306 with
-       username root and blank password. Change below if it's not the case -->
+       username root and admin as password.-->
   	   <bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 	       <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 	       <property name="url" value="jdbc:mysql://localhost:3306/atif"/>
@@ -73,23 +73,32 @@
 		    <property name="sessionFactory" ref="mySessionFactory"/>
 		  </bean>
 		  
-		  <bean id="cheeseDAO" class="com.syedatifakhtar.DAO.CheeseDAOImpl">
+		  <bean id="cheeseDAO" class="com.syedatifakhtar.dao.CheeseDAOImpl">
 		      <property name="mySessionFactory" ref="mySessionFactory"/>
 		  </bean>
 		  
 		  		  
-		  <bean id="orderDAO" class="com.syedatifakhtar.DAO.OrderDAOImpl">
+		  <bean id="orderDAO" class="com.syedatifakhtar.dao.OrderDAOImpl">
 		      <property name="mySessionFactory" ref="mySessionFactory"/>
 		  </bean>
 		  
-		 <bean id="cheeseService" class="com.syedatifakhtar.DAO.CheeseServiceImpl">
+		 <bean id="cheeseService" class="com.syedatifakhtar.service.CheeseServiceImpl">
 		      <property name="cheeseDAO" ref="cheeseDAO"/>
 		  </bean>
+		  
 		   
-		<bean id="cheeseOrderService" class="com.syedatifakhtar.DAO.CheeseOrderServiceImpl">
+		<bean id="cheeseOrderService" class="com.syedatifakhtar.service.CheeseOrderServiceImpl">
 		      <property name="orderDAO" ref="orderDAO"/>
 		      <property name="cheeseDAO" ref="cheeseDAO"/>
 		  </bean>
+		  
+		<bean id="userDAO" class="com.syedatifakhtar.dao.UserDAOImpl">
+		     	<property name="mySessionFactory" ref="mySessionFactory"/>
+		 </bean>
+		 
+		<bean id="userService" class="com.syedatifakhtar.service.UserServiceImpl">
+		    <property name="userDAO" ref="userDAO"/>
+		</bean>
 		
 		  <!-- Activates annotation based transaction management -->
 		  <tx:annotation-driven transaction-manager="transactionManager"/>
@@ -113,7 +122,7 @@
 		 <aop:config>
 		     <aop:aspect ref="cheeseOrderDebugger">
 		         <aop:pointcut id="saveOrder" 
-		             expression="execution(* com.syedatifakhtar.DAO.CheeseOrderServiceImpl.saveOrder(..))" />
+		             expression="execution(* com.syedatifakhtar.service.CheeseOrderServiceImpl.saveOrder(..))" />
 		         <aop:before
 		             pointcut-ref="saveOrder"
 		             method="printOrderInfo" />
