@@ -23,5 +23,12 @@
 		<dependency org="org.aspectj" name="aspectjweaver" rev="1.6.11" conf="*->default"/>
 		<!-- What seriously?Spring mail dependencies in spring-context-support -->
 		<dependency org="org.springframework" name="spring-context-support" rev="3.2.5.RELEASE" conf="*->default"/>
+		
+		<dependency org="com.sun.xml.ws" name="jaxws-rt" rev="2.2.8" conf="*->default"/>
+		<dependency org="org.jvnet.jax-ws-commons.spring" name="jaxws-spring" rev="1.9" conf="*->default">
+		    <exclude module="spring-core"/>
+		    <exclude module="spring-context"/>
+		    <exclude module="stax-ex"/>
+		</dependency>
 	</dependencies>
 </ivy-module>
